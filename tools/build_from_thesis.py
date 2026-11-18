@@ -21,6 +21,9 @@ Needs SUMO (netconvert on PATH or SUMO_HOME set), shapely and pyproj. The thesis
 bayan.net.xml and generated/ (python build.py there). Run from anywhere:
 
     python tools/build_from_thesis.py --thesis ../PASADA-abm-starosa-bayan/starosa_bayan
+
+Then run tools/make_demand.py: the simulation also loads the pickup spots, passengers and other traffic
+it writes, and it puts the jeepneys' stops back into demand/jeepneys.rou.xml.
 """
 
 import argparse
@@ -284,8 +287,8 @@ def main():
 <configuration>
     <input>
         <net-file value="network/santarosa_3brgy.net.xml"/>
-        <route-files value="demand/jeepneys.rou.xml"/>
-        <additional-files value="network/barangays.poly.xml"/>
+        <route-files value="demand/jeepneys.rou.xml,demand/traffic.rou.xml,demand/passengers.rou.xml"/>
+        <additional-files value="network/barangays.poly.xml,network/jeepney_stops.add.xml"/>
     </input>
     <time>
         <begin value="0"/>
@@ -293,7 +296,7 @@ def main():
         <step-length value="1"/>
     </time>
     <processing>
-        <!-- as in the thesis: sublanes, so motorcycles can filter past jeepneys later -->
+        <!-- as in the thesis: sublanes, so motorcycles can filter past jeepneys -->
         <lateral-resolution value="0.4"/>
         <time-to-teleport value="-1"/>
         <collision.action value="warn"/>
