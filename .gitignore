@@ -1,0 +1,8 @@
+# simulation outputs
+tripinfo*.xml
+*.out.xml
+output/
+
+# Python
+__pycache__/
+.venv/
